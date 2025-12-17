@@ -1,0 +1,72 @@
+Task Title:
+Implement PyNVMe Test Cases for NVMe 2.0 Queue Creation, Deletion, and Usage
+
+Prompt:
+You are a senior storage firmware and NVMe test engineer.
+
+Create PyNVMe-based test cases compliant with NVMe 2.0 that validate Admin Queue and I/O Queue behavior, with focus on queue creation, usage, and deletion.
+
+Scope:
+
+1. Admin Queue Validation
+- Verify Admin Submission Queue (ASQ) and Admin Completion Queue (ACQ) initialization
+- Validate queue depth, memory alignment, and doorbell behavior
+- Verify controller enablement and readiness (CC.EN, CSTS.RDY)
+
+2. I/O Queue Creation
+- Create I/O Completion Queues using the Create IO Completion Queue admin command
+- Create I/O Submission Queues using the Create IO Submission Queue admin command
+- Validate:
+  - Queue IDs and uniqueness
+  - Queue size limits as defined by NVMe 2.0
+  - Interrupt vector configuration or polling mode
+  - Contiguous vs non-contiguous memory handling
+
+3. I/O Queue Usage
+- Submit NVMe Read and Write commands through created queues
+- Validate:
+  - Command submission and completion
+  - Completion Queue Entry fields (CID, SQID, SQHD, Status Field)
+  - Phase tag toggling
+  - Correct doorbell register updates
+
+4. I/O Queue Deletion
+- Delete I/O Submission Queues before deleting I/O Completion Queues as required by spec
+- Validate error handling for:
+  - Deleting active queues
+  - Deleting non-existent queues
+  - Invalid deletion order
+
+5. Negative and Edge Test Cases
+- Queue size set to zero
+- Queue size exceeding controller-reported limits
+- Duplicate Queue IDs
+- Submitting commands to deleted queues
+- Controller reset while I/O queues are active
+
+Requirements:
+- Use PyNVMe APIs with idiomatic Python test structure
+- Follow NVMe 2.0 specification terminology
+- Each test case must include:
+  - Purpose
+  - Preconditions
+  - Test Steps
+  - Expected Results
+
+Test Organization:
+- test_admin_queue.py
+- test_io_queue_create.py
+- test_io_queue_usage.py
+- test_io_queue_delete.py
+
+Output:
+- Runnable PyNVMe Python test code
+- Inline comments referencing NVMe 2.0 behavior
+- Clear separation of positive and negative tests
+
+Constraints:
+- Linux environment
+- NVMe 2.0 compliant controller
+- Real hardware execution (no mocking)
+
+Deliver spec-compliant, review-ready test cases suitable for automated execution and Antigravity review workflow.
