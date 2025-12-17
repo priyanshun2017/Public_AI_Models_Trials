@@ -1,0 +1,20 @@
+# PyNVMe NVMe 2.0 Queue Testing Framework Dependencies
+
+# Core PyNVMe library for NVMe controller interaction
+pynvme>=2.0.0
+
+# Testing framework
+pytest>=7.4.0
+pytest-timeout>=2.1.0
+pytest-xdist>=3.3.0  # For parallel test execution
+
+# Property-based testing
+hypothesis>=6.82.0
+
+# Data validation and utilities
+dataclasses-json>=0.5.9
+typing-extensions>=4.7.0
+
+# Logging and reporting
+colorlog>=6.7.0
+pytest-html>=3.2.0
